@@ -34,7 +34,7 @@ mysql_query("set names utf8");
 
 //echo date('y-m-d H:i:s',time());
 $date= date('H:i:s',time());
-if ($date > '17:30:00'){
+if ($date > '12:30:00'){
 ?>
 <h1 class="alert alert-warning"> 不好意思，餐厅已经打烊了！</h1>
 <form method="post" action="index.php" class="form-horizontal" target="id_iframe" hidden="hidden">
@@ -135,7 +135,7 @@ if ($num_rows >0){
 <?php
         }
 ?>
-    <td><?php echo $i+1 ?></td>
+    <td><?php echo ($page-1)*10+$i+1 ?></td>
     <td><?php echo $row['name'] ?></td>
     <td><?php echo $row['love'] ?></td>
     <td><?php echo $row['shijian'] ?></td>
