@@ -34,9 +34,9 @@ mysql_query("set names utf8");
 
 //echo date('y-m-d H:i:s',time());
 $date= date('H:i:s',time());
-if ($date > '12:30:00'){
+if ($date > '16:00:00'){
 ?>
-<h1 class="alert alert-warning"> 不好意思，餐厅已经打烊了！</h1>
+<h1 class="alert alert-warning"> 来晚了，餐厅已打烊，下次早点儿！</h1>
 <form method="post" action="index.php" class="form-horizontal" target="id_iframe" hidden="hidden">
 <?php
 }else{
@@ -148,6 +148,16 @@ if ($num_rows >0){
 <div id="show_page">
     <p>
 <?php
+if ($num_rows ==0){
+?>
+
+<img border="0" src="http://7xolbq.com1.z0.glb.clouddn.com/timg.jpeg" style="width:100%;height:100%;" ></br />
+
+<?php
+
+}else{
+?>
+<?php
 $first = 1;
 $prev = $page - 1;
 $next = $page + 1;
@@ -157,16 +167,17 @@ if ($page == 1 && $pages > 1) {
     echo "上一页&nbsp;|&nbsp;";
     echo "<a href=\"index.php?page=" . $next . "\">下一页</a>&nbsp;|&nbsp;";
     echo "<a href=\"index.php?page=" . $last . "\">尾页</a>&nbsp;|&nbsp;";
-} elseif ($page >= 1 && $page != $pages && $num > 0) {
-    echo "<a href=\"index.php?page=" . $first . "\">首页</a>&nbsp;|&nbsp;";
-    echo "<a href=\"index.php?page=" . $prev . "\">上一页</a>&nbsp;|&nbsp;";
-    echo "<a href=\"index.php?page=" . $next . "\">下一页</a>&nbsp;|&nbsp;";
-    echo "<a href=\"index.php?page=" . $last . "\">尾页</a>&nbsp;|&nbsp;";
 } elseif ($page == $pages && $page != 1) {
     echo "<a href=\"index.php?page=" . $first . "\">首页</a>&nbsp;|&nbsp;";
     echo "<a href=\"index.php?page=" . $prev . "\">上一页</a>&nbsp;|&nbsp;";
     echo "下一页&nbsp;|&nbsp;";
     echo "尾页&nbsp;|&nbsp;";
+} elseif ($page > 1) {
+//} elseif ($page > 1 && $page != $pages && $num > 0) {
+    echo "<a href=\"index.php?page=" . $first . "\">首页</a>&nbsp;|&nbsp;";
+    echo "<a href=\"index.php?page=" . $prev . "\">上一页</a>&nbsp;|&nbsp;";
+    echo "<a href=\"index.php?page=" . $next . "\">下一页</a>&nbsp;|&nbsp;";
+    echo "<a href=\"index.php?page=" . $last . "\">尾页</a>&nbsp;|&nbsp;";
 } elseif ($page == $pages) {
     echo "首页&nbsp;|&nbsp;";
     echo "上一页&nbsp;|&nbsp;";
@@ -182,6 +193,9 @@ if ($page == 1 && $pages > 1) {
         共&nbsp;<span><?php echo $pages ?></span>&nbsp;页&nbsp;|&nbsp;当前第&nbsp;<span><?php echo $page ?></span>&nbsp;页&nbsp;|&nbsp;共&nbsp;<span><?php echo $num_rows ?></span>&nbsp个人
     </p>
 </div>
+<?php
+}
+?>
 <?php
 mysql_close ();
 ?>
